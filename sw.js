@@ -1,6 +1,6 @@
-const V = 'cambi-v2';
-const LOCAL = ["./","index.html","presentazione.html","support.js","ios-frame.jsx","manifest.json","manifest-presentazione.json","icon-192.png","icon-512.png","ds/styles.css","ds/bundle.js","assets/logo-fpcgil.png","assets/logo-fpcgil-splash.png","assets/spid-ico-circle-bb.svg","assets/logo-cie-id.svg"];
-const CDN = ["https://unpkg.com/react@18.3.1/umd/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"];
+const V = 'cambi-v3';
+const LOCAL = ["./","index.html","presentazione.html","support.js","ios-frame.jsx","manifest.json","manifest-presentazione.json","icon-192.png","icon-512.png","ds/styles.css","ds/bundle.js","assets/logo-fpcgil.png","assets/logo-fpcgil-splash.png","assets/spid-ico-circle-bb.svg","assets/logo-cie-id.svg","vendor/react.production.min.js","vendor/react-dom.production.min.js","vendor/babel.min.js"];
+const CDN = [];
 const FONTS = ["https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap","https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600;700&display=swap"];
 self.addEventListener('install', e => {
   e.waitUntil((async () => {
@@ -41,9 +41,10 @@ self.addEventListener('fetch', e => {
   } else {
     e.respondWith((async () => {
       const c = await caches.open(V);
+      if (url.hostname.indexOf('fonts.') !== 0) return fetch(req);
       const hit = await c.match(req);
       if (hit) return hit;
-      try { const r = await fetch(req); c.put(req, r.clone()); return r; } catch (_) { return Response.error(); }
+      try { const r = await fetch(req); if (r.ok) c.put(req, r.clone()); return r; } catch (_) { return Response.error(); }
     })());
   }
 });
