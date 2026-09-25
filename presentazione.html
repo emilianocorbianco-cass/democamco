@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cambi Compensativi · Presentazione</title>
+<link rel="manifest" href="manifest-presentazione.json">
+<meta name="theme-color" content="#ec3013">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <script>if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));</script>
 <script src="./support.js"></script>
 </head>
@@ -12,27 +17,30 @@
   <link rel="stylesheet" href="ds/styles.css">
   <script src="ds/bundle.js"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600;700&display=swap">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Cambi Compensativi</title>
-<style>html,body{background:#ec3013;margin:0}</style>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ec3013">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="mobile-web-app-capable" content="yes">
-  <style>html,body{height:100%;overflow:hidden;overscroll-behavior:none} body{margin:0;background:#ec3013} @keyframes splashIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}} a{color:var(--color-accent-700)} a:hover{color:var(--color-accent)} input[type=range]{accent-color:#ec3013} input[type=checkbox]{accent-color:#ec3013;width:22px;height:22px} @keyframes spin{to{transform:rotate(360deg)}} @keyframes drive{0%{transform:translateX(0);opacity:0}8%{opacity:1}88%{transform:translateX(-112px);opacity:1}100%{transform:translateX(-112px);opacity:0}} @keyframes driveR{0%{transform:translateX(0);opacity:0}8%{opacity:1}88%{transform:translateX(112px);opacity:1}100%{transform:translateX(112px);opacity:0}} @keyframes bubble{0%{opacity:0;transform:scale(.8)}6%{opacity:1;transform:scale(1)}28%{opacity:1;transform:scale(1)}34%{opacity:0;transform:scale(.9)}100%{opacity:0;transform:scale(.9)}}</style>
+  <style>body{margin:0;background:var(--color-bg)} a{color:var(--color-accent-700)} a:hover{color:var(--color-accent)} input[type=range]{accent-color:#ec3013} input[type=checkbox]{accent-color:#ec3013;width:22px;height:22px} @keyframes spin{to{transform:rotate(360deg)}} @keyframes drive{0%{transform:translateX(0);opacity:0}8%{opacity:1}88%{transform:translateX(-112px);opacity:1}100%{transform:translateX(-112px);opacity:0}} @keyframes driveR{0%{transform:translateX(0);opacity:0}8%{opacity:1}88%{transform:translateX(112px);opacity:1}100%{transform:translateX(112px);opacity:0}} @keyframes bubble{0%{opacity:0;transform:scale(.8)}6%{opacity:1;transform:scale(1)}28%{opacity:1;transform:scale(1)}34%{opacity:0;transform:scale(.9)}100%{opacity:0;transform:scale(.9)}}</style>
 </helmet>
-<div style="height:100dvh;width:100vw;overflow:hidden;font-family:var(--font-body);color:var(--color-text)">
-<sc-if value="{{ splashOn }}" hint-placeholder-val="{{ true }}">
-  <div style="position:fixed;inset:0;z-index:100;background:#ec3013;display:flex;align-items:center;justify-content:center;transition:opacity .45s ease;opacity:{{ splashOpacity }};pointer-events:none">
-    <img src="assets/logo-fpcgil-splash.png" alt="FP CGIL" style="width:36vmin;max-width:180px;height:auto;display:block;opacity:0;animation:splashIn .6s ease-out .15s forwards">
+<div style="min-height:100vh;display:flex;gap:40px;align-items:flex-start;justify-content:center;padding:40px 32px;font-family:var(--font-body);color:var(--color-text)">
+  <div style="width:240px;flex:none;position:sticky;top:40px">
+    <div style="background:var(--color-accent);color:#fff;padding:14px;display:flex;flex-direction:column;gap:18px;margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start"><img src="assets/logo-fpcgil.png" alt="FP CGIL" style="height:44px;width:44px"><span style="font-family:var(--font-heading);font-weight:800;font-size:12px;letter-spacing:0.08em;border:2px solid #fff;padding:3px 7px">v2.2</span></div>
+      <div style="font-family:var(--font-heading);font-weight:800;font-size:20px;line-height:1.05;letter-spacing:-0.01em">Cambi Compensativi<br><span style="font-weight:600;font-size:11px;letter-spacing:0.14em;text-transform:uppercase">Prototipo iOS 390×844</span></div>
+    </div>
+    <sc-for list="{{ rail }}" as="g" hint-placeholder-count="4">
+      <div style="margin-bottom:16px;border-top:2px solid var(--color-divider);padding-top:8px">
+        <div style="font-family:var(--font-heading);font-size:10.5px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:6px">{{ g.title }}</div>
+        <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+          <div onClick="{{ it.go }}" style="cursor:pointer;font-size:13px;padding:6px 10px;background:{{ it.bg }};color:{{ it.color }};font-weight:{{ it.weight }}" style-hover="background:var(--color-neutral-200)">{{ it.name }}</div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <p style="font-size:11.5px;line-height:1.5;color:var(--color-neutral-600);border-top:2px solid var(--color-divider);padding-top:10px;margin:0">Il prototipo è cliccabile anche dall'interno del telefono. Persone: Giulia (iscritta), Infermiere DEP1, Viterbo → Rieti · Marco (non iscritto, abbonato), Funzionario INPS Terza area D1, Roma EUR → Napoli Vomero.</p>
   </div>
-</sc-if>
-  <div style="height:100%;width:100%;max-width:520px;margin:0 auto;background:#fff">
-  <div style="position:relative;height:100%;box-sizing:border-box;padding-top:env(safe-area-inset-top);display:flex;flex-direction:column;background:{{ topBg }};font-family:var(--font-body);color:#201e1d">
-  <div style="position:absolute;left:0;right:0;top:env(safe-area-inset-top);height:22px;background:linear-gradient(180deg,#ec3013,rgba(236,48,19,0));pointer-events:none;z-index:5"></div>
+
+  <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" width="{{ 390 }}" height="{{ 844 }}" dark="{{ darkBar }}" hint-size="410,880">
+  <div style="position:relative;height:100%;box-sizing:border-box;padding-top:58px;display:flex;flex-direction:column;background:{{ topBg }};font-family:var(--font-body);color:#201e1d">
+  <div style="position:absolute;left:0;right:0;top:58px;height:22px;background:linear-gradient(180deg,#ec3013,rgba(236,48,19,0));pointer-events:none;z-index:5"></div>
   <sc-if value="{{ showRestart }}" hint-placeholder-val="{{ false }}">
-    <button onClick="{{ restart }}" aria-label="Ricomincia dall'inizio" title="Ricomincia dall'inizio" style="all:unset;box-sizing:border-box;cursor:pointer;position:absolute;right:14px;top:calc(env(safe-area-inset-top) + 12px);z-index:6;width:36px;height:36px;border-radius:12px;background:#fff;border:2px solid #ec3013;display:flex;align-items:center;justify-content:center;color:#201e1d" style-hover="background:#fde9e5" style-active="background:#f6d3cb"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg></button>
+    <button onClick="{{ restart }}" aria-label="Ricomincia dall'inizio" title="Ricomincia dall'inizio" style="all:unset;box-sizing:border-box;cursor:pointer;position:absolute;right:14px;top:70px;z-index:6;width:36px;height:36px;border-radius:12px;background:#fff;border:2px solid #ec3013;display:flex;align-items:center;justify-content:center;color:#201e1d" style-hover="background:#fde9e5" style-active="background:#f6d3cb"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"></path><path d="M3 4v5h5"></path></svg></button>
   </sc-if>
   <div style="flex:1;overflow-y:auto;display:flex;flex-direction:column;background:{{ screenBg }};padding-top:10px">
 
@@ -661,14 +669,14 @@
 
   </div>
   <sc-if value="{{ showTabs }}" hint-placeholder-val="{{ false }}">
-    <div style="flex:none;display:grid;grid-template-columns:1fr 1fr 1fr;border-top:2px solid #201e1d;background:#fff;padding-bottom:max(16px,env(safe-area-inset-bottom))">
+    <div style="flex:none;display:grid;grid-template-columns:1fr 1fr 1fr;border-top:2px solid #201e1d;background:#fff;padding-bottom:16px">
       <button onClick="{{ nav.home }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0 4px;border-top:4px solid {{ tabHome }};margin-top:-2px;font-family:var(--font-heading);font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:{{ tabHomeText }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10 12 3l9 7v11H3z"></path><path d="M9 21v-7h6v7"></path></svg>Home</button>
       <button onClick="{{ nav.c5 }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0 4px;border-top:4px solid {{ tabReq }};margin-top:-2px;font-family:var(--font-heading);font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:{{ tabReqText }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v5h5M8 13h8M8 17h5"></path></svg>Richiesta</button>
       <button onClick="{{ nav.chat }}" style="all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0 4px;border-top:4px solid {{ tabChat }};margin-top:-2px;font-family:var(--font-heading);font-size:10.5px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:{{ tabChatText }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Chat</button>
     </div>
   </sc-if>
   </div>
-  </div>
+  </x-import>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
@@ -697,7 +705,7 @@ class Component extends DCLogic {
       {who:'Paola Ferri · Ref. FP CGIL Roma', ref:true, text:'Vi seguo io con Gennaro: per INPS la domanda di mobilit\u00e0 volont\u00e0ria passa dalla Direzione regionale. Vi preparo modulo e PEC corretti.'}
     ]
   };
-  componentDidMount() { this._s1 = setTimeout(() => this.setState({ splashFade: true }), 2000); this._s2 = setTimeout(() => this.setState({ splashDone: true }), 2500); this._iv = setInterval(() => this.setState({ now: Date.now() }), 1000); }
+  componentDidMount() { this._iv = setInterval(() => this.setState({ now: Date.now() }), 1000); }
   componentWillUnmount() { clearInterval(this._iv); this._t1 && clearTimeout(this._t1); }
   go(s) {
     const st = { screen: s };
@@ -722,18 +730,18 @@ class Component extends DCLogic {
     const s = this.state, scr = s.screen;
     const screens = ['onb1','onb2','onb3','login','verify','esito','home','c1','c2','c4','c5','match','chat','pec','tri','trichat','incompleto','b1','b2','b3','b4','b5','b6'];
     const is = {}; screens.forEach(k => is[k] = scr === k);
-    const showRestart = !['onb1','onb2','onb3'].includes(scr) && !!s.splashDone;
+    const showRestart = !['onb1','onb2','onb3'].includes(scr);
     const restart = () => this.setState({ screen: 'onb1', published: false, privacy: false, deadline: null, triMe: false, triDav: false, chatInput: '', triInput: '', marcoInput: '' });
     const nav = {}; screens.forEach(k => nav[k] = () => this.go(k));
     const rail = [
-      { title: 'Flusso A · Accesso', items: [['Onboarding','onb1'],['SPID / CIE','login'],['Verifica','verify'],['Esito iscrizione','esito'],['Home','home']] },
+      { title: 'Flusso A · Accesso', items: [['Onboarding','onb1'],['SPID / CIE','login'],['Verifica','verify'],['Esito iscrizione','esito'],['Home · prima della scheda','home0'],['Home · richiesta attiva','home']] },
       { title: 'Flusso C · Scheda cambi', items: [['1 · Posizione attuale','c1'],['2 · Destinazione e raggio','c2'],['3 · Consenso','c4'],['Stato richiesta','c5']] },
       { title: 'Flusso D · Match', items: [['Schermata match','match'],['Chat protetta','chat'],['Guida alla PEC','pec']] },
       { title: 'Flusso E · Cambio a tre', items: [['Ciclo e conferma','tri'],['Chat a tre','trichat'],['Triangolo incompleto','incompleto']] },
       { title: 'Flusso B · Marco, non iscritto', items: [['Esito: non iscritto','b1'],['Due strade','b2'],['Abbonamento','b3'],['Home abbonato','b4'],['Match con Antonio','b5'],['Chat con Antonio','b6']] }
     ].map(g => ({ title: g.title, items: g.items.map(([name, k]) => ({
-      name, go: () => { if (['home','c5','match','chat','pec','tri','trichat','incompleto'].includes(k) && !this.state.published) this.setState({ published: true, privacy: true }); this.go(k); },
-      bg: scr === k ? '#201e1d' : 'transparent', color: scr === k ? '#fff' : '#201e1d', weight: scr === k ? 700 : 400
+      name, go: () => { if (k === 'home0') { this.setState({ published: false }); this.go('home'); return; } if (['home','c5','match','chat','pec','tri','trichat','incompleto'].includes(k) && !this.state.published) this.setState({ published: true, privacy: true }); this.go(k); },
+      ...(() => { const on = k === 'home0' ? (scr === 'home' && !s.published) : k === 'home' ? (scr === 'home' && s.published) : scr === k; return { bg: on ? '#201e1d' : 'transparent', color: on ? '#fff' : '#201e1d', weight: on ? 700 : 400 }; })()
     })) }));
     const red = ['onb1','onb2','onb3','verify','esito','home'], ink = ['match','b5','b1','b4'];
     const topBg = '#ec3013';
@@ -748,7 +756,7 @@ class Component extends DCLogic {
     const mk = (k, v) => (e) => this.setState({ [k]: v !== undefined ? v : e.target.checked });
     const tabOn = (arr) => arr.includes(scr);
     return { showRestart, restart,
-      splashOn: !s.splashDone, splashOpacity: s.splashFade ? 0 : 1, is, nav, rail, topBg, darkBar: true, screenBg: ['home','b4'].includes(scr) ? '#f3f2f2' : '#fff',
+      is, nav, rail, topBg, darkBar: true, screenBg: ['home','b4'].includes(scr) ? '#f3f2f2' : '#fff',
       raggio: r, setRaggio: (e) => this.setState({ raggio: +e.target.value }), raggioLabel, raggioR: 8 + Math.sqrt(r) * 1.9,
       t104: s.t104, tLim: s.tLim, tFigli: s.tFigli, tg104: mk('t104'), tgLim: mk('tLim'), tgFigli: mk('tFigli'),
       tuteleSummary: tut.length ? tut.join(', ') : 'nessuna',
