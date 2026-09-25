@@ -1,11 +1,11 @@
-const V = 'cambi-v1';
+const V = 'cambi-v2';
 const LOCAL = ["./","index.html","presentazione.html","support.js","ios-frame.jsx","manifest.json","manifest-presentazione.json","icon-192.png","icon-512.png","ds/styles.css","ds/bundle.js","assets/logo-fpcgil.png","assets/logo-fpcgil-splash.png","assets/spid-ico-circle-bb.svg","assets/logo-cie-id.svg"];
 const CDN = ["https://unpkg.com/react@18.3.1/umd/react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"];
 const FONTS = ["https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap","https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600;700&display=swap"];
 self.addEventListener('install', e => {
   e.waitUntil((async () => {
     const c = await caches.open(V);
-    await c.addAll(LOCAL);
+    await Promise.all(LOCAL.map(async u => { try { const r = await fetch(u); if (r.ok) await c.put(u, r); } catch (_) {} }));
     await Promise.all(CDN.map(async u => { try { await c.put(u, await fetch(u, { mode: 'no-cors' })); } catch (_) {} }));
     await Promise.all(FONTS.map(async u => { try {
       const r = await fetch(u); const t = await r.clone().text(); await c.put(u, r);
@@ -30,11 +30,12 @@ self.addEventListener('fetch', e => {
     e.respondWith((async () => {
       const c = await caches.open(V);
       try {
-        const r = await timeout(fetch(req, { cache: 'no-cache' }), 4000);
+        const r = await timeout(fetch(req), 5000);
         if (r.ok) c.put(req, r.clone());
         return r;
       } catch (_) {
-        return (await c.match(req, { ignoreSearch: true })) || (req.mode === 'navigate' ? await c.match('index.html') : Response.error());
+        const hit = (await c.match(req, { ignoreSearch: true })) || (req.mode === 'navigate' ? await c.match(url.pathname.endsWith('presentazione.html') ? 'presentazione.html' : 'index.html') : null);
+        return hit || fetch(req);
       }
     })());
   } else {
