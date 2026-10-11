@@ -1,4 +1,4 @@
-const V = 'cambi-v3';
+const V = 'cambi-v6';
 const LOCAL = ["./","index.html","presentazione.html","support.js","ios-frame.jsx","manifest.json","manifest-presentazione.json","icon-192.png","icon-512.png","ds/styles.css","ds/bundle.js","assets/logo-fpcgil.png","assets/logo-fpcgil-splash.png","assets/spid-ico-circle-bb.svg","assets/logo-cie-id.svg","vendor/react.production.min.js","vendor/react-dom.production.min.js","vendor/babel.min.js"];
 const CDN = [];
 const FONTS = ["https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap","https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600;700&display=swap"];
